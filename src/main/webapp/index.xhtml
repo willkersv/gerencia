@@ -6,40 +6,53 @@
 
     <h:head>
         <title>Cadastro de Pessoas</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </h:head>
 
-    <h:graphicImage value="/images/teamFriends.png" style="float: right" width="100" height="100"/>
     <h:body>
+        <h:graphicImage class="logo" value="/images/teamFriends.png" width="100" height="100" />
         <h:form>
-            id <h:inputText value="#{beanJFPessoa.id}" size="10"/>
-            nome <h:inputText value="#{beanJFPessoa.nome}" size="30"/>
+            <h3>Cadastro de Pessoas</h3>
+            <label for="id">ID</label>
+            <h:inputText id="id" value="#{beanJFPessoa.id}" size="10" />
 
-            <h:selectOneMenu value="#{beanJFPessoa.cidade}">
+            <label for="nome">Nome</label>
+            <h:inputText id="nome" value="#{beanJFPessoa.nome}" size="30" />
+
+            <label for="cidade">Cidade</label>
+            <h:selectOneMenu id="cidade" value="#{beanJFPessoa.cidade}">
                 <f:selectItem itemValue="" itemLabel="=== Selecione uma Cidade ===" />
                 <f:selectItems value="#{beanJFCidade.all}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}" />
             </h:selectOneMenu>
-            <h:commandButton value="[]" action="#{beanJFPessoa.newID()}" />
-            <h:commandButton value="+" action="#{beanJFPessoa.add()}" />
+
+            <h:commandButton value="Gerar ID" action="#{beanJFPessoa.newID()}" />
+            <h:commandButton value="Adicionar" action="#{beanJFPessoa.add()}" />
         </h:form>
-    <hr/>
-        <h2>== Lista de clientes cadastrados ==</h2>
+
+        <hr />
+
+        <h2>Lista de Clientes Cadastrados</h2>
+
         <h:form>
             <h:dataTable value="#{beanJFPessoa.all}" var="pessoa">
                 <h:column>
+                    <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{pessoa.id}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Nome</f:facet>
                     <h:outputText value="#{pessoa.nome}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Cidade</f:facet>
                     <h:outputText value="#{pessoa.cidade.nome}" />
                 </h:column>
-
             </h:dataTable>
         </h:form>
-<h:form>
-    <br/><br/><br/>
-    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/rest/application.wadl">WADL</h:outputLink>
-</h:form>
+
+        <h:form>
+            <br />
+            <h:outputLink value="#{facesContext.externalContext.requestContextPath}/rest/application.wadl">WADL</h:outputLink>
+        </h:form>
     </h:body>
 </html>
