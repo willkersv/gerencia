@@ -1,4 +1,3 @@
-
 package com.cp.web;
 
 import com.cp.data.crud.BeanCrudPessoa;
@@ -39,12 +38,10 @@ public class BeanJFPessoa {
     
     public void add(){
         if(id==0){
-            FacesContext.getCurrentInstance().addMessage("ERRO",new FacesMessage("Erro: Código não pode ser zero."));
-          //  return "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Código não pode ser zero."));
         }
         if(beanPessoa.find(id)!=null){
-            FacesContext.getCurrentInstance().addMessage("ERRO",new FacesMessage("Erro: Código existente."));
-            //return "";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Código existente."));
         }
         Pessoa p = new Pessoa();
         p.setNome(nome);
@@ -52,7 +49,6 @@ public class BeanJFPessoa {
         beanPessoa.persist(p);
         p.setCidade(beanCidade.find(cidade));
         beanPessoa.merge(p);
-       // return "";
     }
     
     public List<Pessoa> getAll(){
