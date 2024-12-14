@@ -3,14 +3,9 @@ package com.cp.util;
 import net.datafaker.providers.base.App;
 import org.junit.jupiter.api.DisplayName;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
 class GenIdTest {
-
-
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -38,15 +33,25 @@ class GenIdTest {
         assertFalse(isPrimo(150));
 
         AppLog.getInstance().info("Fim do teste em getIdPrimo");
-
     }
 
     private boolean isPrimo(int num) {
-        for(int i = num-1; i > 1; i--) {
-            if(num % i == 0) {
+        for (int i = num - 1; i > 1; i--) {
+            if (num % i == 0) {
                 return false;
             }
         }
         return true;
+    }
+
+    @DisplayName("Teste para gerar nome")
+    @org.junit.jupiter.api.Test
+    void getNome() {
+        GenId genId = new GenId();
+        String nome = genId.getNome();
+        assertNotNull(nome);
+        assertFalse(nome.isEmpty());
+
+        AppLog.getInstance().info("Fim do teste em getNome");
     }
 }
